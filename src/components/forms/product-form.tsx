@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Toaster } from "../ui/toaster";
+import { useToast } from "../ui/use-toast";
 interface ProductFormComponentProps {}
 const Images = dynamic(() => import("./cards/images"), {
   ssr: false,
@@ -38,6 +40,8 @@ const ConfirmationFooterComponent = dynamic(
   }
 );
 const ProductFormComponent: React.FC<ProductFormComponentProps> = () => {
+  const { toast } = useToast();
+
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -58,11 +62,15 @@ const ProductFormComponent: React.FC<ProductFormComponentProps> = () => {
     },
   });
   const onSubmit = (data: z.infer<typeof productSchema>) => {
+    toast({
+      description: "Form validated successfully",
+    });
     console.log("onSubmit", data);
     console.log("onSubmit");
   };
   return (
     <Form {...form}>
+      <Toaster />
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <HeaderWithTitle title="Add Product" className="px-1 py-3" />
         <main className="flex gap-6 flex-col xl:flex-row flex-wrap xl:flex-nowrap">
