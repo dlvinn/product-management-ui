@@ -61,11 +61,11 @@ const AdditionalInformation: React.FC<AdditionalInformationProps> = ({
                       {...field}
                       placeholder={`Enter part number ${index + 1}`}
                     />
-                    {index > 0 && (
+                    {partNumbersFields.length > 1 && (
                       <Button
                         type="button"
-                        className="bg-orange-600 hover:bg-red-700 text-white border border-red-700 rounded-lg"
-                        onClick={() => removeNote(index)}
+                        className="bg-red-600 hover:bg-red-700 text-white border border-red-700 rounded-lg"
+                        onClick={() => removePartNumber(index)}
                       >
                         <Trash size={20} />
                       </Button>
@@ -79,7 +79,7 @@ const AdditionalInformation: React.FC<AdditionalInformationProps> = ({
         <Button
           type="button"
           className="w-full bg-black text-white flex items-center justify-center mt-2"
-          onClick={() => appendPartNumber("")}
+          onClick={() => appendPartNumber("part Number")} // Append empty object
         >
           <Plus size={20} className="mr-2" />
           Add Part Number
@@ -101,10 +101,10 @@ const AdditionalInformation: React.FC<AdditionalInformationProps> = ({
                       aria-rowcount={3}
                       placeholder={`Enter note ${index + 1}`}
                     />
-                    {index > 0 && (
+                    {notesFields.length > 1 && (
                       <Button
                         type="button"
-                        className="bg-orange-600 hover:bg-red-700 text-white border border-red-700 rounded-lg"
+                        className="bg-red-600 hover:bg-red-700 text-white border border-red-700 rounded-lg"
                         onClick={() => removeNote(index)}
                       >
                         <Trash size={20} />
@@ -119,7 +119,7 @@ const AdditionalInformation: React.FC<AdditionalInformationProps> = ({
         <Button
           type="button"
           className="w-full bg-black text-white flex items-center justify-center mt-2"
-          onClick={() => appendNote("")}
+          onClick={() => appendNote("note ")} // Append empty object
         >
           <Plus size={20} className="mr-2" />
           Add Note
